@@ -15,6 +15,7 @@ body{
     background: linear-gradient(90deg, rgba(65, 185, 131, 1) 0%, rgba(0, 212, 255, 1) 100%);
 }
 
+/* MENU */
 span#burger {
     color: white;
     /* display: block; */
@@ -53,6 +54,67 @@ menu > ul > li:hover {
     cursor: pointer;
 }
 
+div#burger-container {
+    height: 100%;
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 15px;
+    padding-left: 15px;
+    padding-bottom: 5px;
+}
+
+#checkbox-menu {
+    position: absolute;
+    opacity: 0;
+}
+
+label {
+    cursor: pointer;
+    position: relative;
+    display: block;
+    height: 22px;
+    width: 30px;
+}
+
+label span {
+    position: absolute;
+    display: block;
+    height: 4px;
+    width: 100%;
+    border-radius: 30px;
+    background: white;
+    transition: 0.25s ease-in-out;
+}
+
+label span:nth-child(1) {
+    top: 0;
+}
+
+label span:nth-child(2) {
+    top: 8px;
+}
+
+label span:nth-child(3) {
+    top: 16px;
+}
+
+#checkbox-menu:checked + label span:nth-child(1) {
+    transform: rotate(-45deg);
+    top: 8px;
+}
+
+#checkbox-menu:checked + label span:nth-child(2) {
+    opacity: 0;
+}
+
+#checkbox-menu:checked + label span:nth-child(3) {
+    transform: rotate(45deg);
+    top: 8px;
+}
+
+/* PARTE PRINCIPAL */
 main {
     margin-top: 140px;
 }
@@ -191,17 +253,29 @@ h2.subtitle {
     font-weight: 900;
     cursor: default;
     text-align: center;
+    position: relative;
+    z-index: 5;
 }
 
-.players span.activate{
+.players span:first-child {
     color: white;
-    background: rgba(0, 212, 255, 1);
+}
 
+.players .slider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 50%;
+    background: rgba(0, 212, 255, 1);
+    border-radius: 60px;
+    z-index: 2;
 }
 
 /* TABULEIRO */
 .board{
-    display: grid;
+    /* display: grid; */
+    display: none;
     width: 100%;
     height: 100%;
     justify-content: center;

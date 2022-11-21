@@ -6,11 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
     <title>Jogo da Velha</title>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
     <header id = "myHeader">
-        <span id = "burger" class="material-icons">menu</span>
+        <div id="burger-container">
+            <input type="checkbox" id="checkbox-menu">
+
+            <label for="checkbox-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+        </div>
         <menu id = "menuItens">
             <ul>
                 <li data-sobre>Sobre</li>
@@ -31,8 +38,9 @@
 
         <div class="player-turn-indicator">
             <div class="players">
-                <span class="x-turn activate">X</span>
+                <span class="x-turn">X</span>
                 <span class="circle-turn">O</span>
+                <div class="slider"></div>
             </div>
         </div>
 

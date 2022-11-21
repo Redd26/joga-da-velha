@@ -18,7 +18,8 @@ circleScore.innerText = circleScorePoints;
 const hideElement = document.querySelector('[data-hide-element]');
 
 // Variaveis Menu
-const burgerMenu = document.getElementById("burger");
+const burgerContainer = document.getElementById("burger-container");
+const burgerMenu = document.getElementById("checkbox-menu");
 const menuItens = document.getElementById("menuItens");
 const header = document.getElementById("myHeader");
 const sobreButton = document.querySelector('[data-sobre]');
@@ -137,11 +138,13 @@ const handleClick = (e) => {
 };
 
 const showBurgerMenu = () => {
+    burgerMenu.checked = true;
     menuItens.style.display = "block";
     header.style.backgroundColor = "rgba(255, 255, 255, 0.3)";
 };
 
 const hideBurgerMenu = () => {
+    burgerMenu.checked = false;
     menuItens.style.display = "none";
     header.style.backgroundColor = "transparent";
 };
@@ -156,6 +159,6 @@ startGame();
 restartButtonElement.forEach(restartButton =>
     restartButton.addEventListener("click", startGame));
 
-burgerMenu.addEventListener("mouseover", showBurgerMenu);
+burgerContainer.addEventListener("mouseover", showBurgerMenu);
 header.addEventListener("mouseleave", hideBurgerMenu);
 redirectPage(sobreButton, "sobre.html");
