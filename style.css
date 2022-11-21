@@ -88,12 +88,14 @@ h2.subtitle {
     border-radius: 30px;
 }
 
+/* CAIXA DE ESCOLHA DE JOGADOR */
 .select-player {
+    display: none;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.1);
     padding: 20px 25px 25px;
     border-radius: 5px;
     max-width: 710px;
@@ -107,14 +109,16 @@ h2.subtitle {
     font-size: 40px;
     font-weight: 600;
     padding-bottom: 10px;
+    color: rgba(255, 255, 255, 0.8);
     border-bottom: 3px solid rgba(0, 212, 255, 1);
 }
 
 .select-player .player-title {
+    color: rgba(255, 255, 255, 0.8);
     font-size: 25px;
     font-weight: 500;
-    margin-top: 90px;
-    margin-bottom: 70px;
+    margin-top: 110px;
+    margin-bottom: 50px;
     margin-left: 0;
     margin-right: 0;
 }
@@ -152,9 +156,52 @@ h2.subtitle {
     margin-left: 5px;
 }
 
+/* INDICADOR DE QUEM ESTÁ JOGANDO NA VEZ */
+.player-turn-indicator {
+    position: relative;
+    top: 15%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.player-turn-indicator {
+    /* display: flex; */
+    background: rgba(255, 255, 255, 0.2);
+    padding: 7px;
+    border-radius: 60px;
+    max-width: 400px;
+    max-height: 100px;
+    width: 100%;
+    height: 100%;
+}
+
+.player-turn-indicator .players{
+    position: relative;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.player-turn-indicator .players span {
+    width: 100%;
+    color: white;
+    border-radius: 60px;
+    padding: 7px 0;
+    font-size: 25px;
+    font-weight: 900;
+    cursor: default;
+    text-align: center;
+}
+
+.players span.activate{
+    color: white;
+    background: rgba(0, 212, 255, 1);
+
+}
+
 /* TABULEIRO */
 .board{
-    display: none;
+    display: grid;
     width: 100%;
     height: 100%;
     justify-content: center;
