@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>Jogo da Velha</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <header id = "myHeader">
+        <span id = "burger" class="material-icons">menu</span>
+        <menu id = "menuItens">
+            <ul>
+                <li data-sobre>Sobre</li>
+            </ul>
+        </menu>
+    </header>
+    <main>
+        <div class="select-player">
+            <header>Jogo da Velha</header>
+            <div class="select-player content">
+                <div class="player-title">Escolha de que lado irá jogar</div>
+                <div class="player-options">
+                    <button class="playerX">Jogar como X</button>
+                    <button class="playerCircle">Jogar como O</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="board" data-board>
+            <div class="cell" data-cell></div>
+            <div class="cell" data-cell></div>
+            <div class="cell" data-cell></div>
+            <div class="cell" data-cell></div>
+            <div class="cell" data-cell></div>
+            <div class="cell" data-cell></div>
+            <div class="cell" data-cell></div>
+            <div class="cell" data-cell></div>
+            <div class="cell" data-cell></div>
+        </div>
+
+        <div class="score x-score-board">
+            <p>Vitórias de X</p>
+            <p data-x-score>0</p>
+        </div>
+
+        <div class="score circle-score-board">
+            <p>Vitórias de O</p>
+            <p data-circle-score>0</p>
+        </div>
+    
+        <div class="winning-message" data-winning-message>
+            <p class="winning-message-text" data-winning-message-text>X VENCEU</p>
+            <button class="restart-button" data-restart-button>Jogar Novamente</button>
+        </div>
+    
+        <div class="restart-button-position">
+            <button class="restart-button" data-restart-button data-hide-element>Recomeçar</button>
+        </div>
+    </main>
+    
+    <script src="./indexScript.js"></script>
+</body>
+</html>
