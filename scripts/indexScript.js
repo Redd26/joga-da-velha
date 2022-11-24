@@ -1,6 +1,7 @@
 // Variaveis Tabuleiro
 const cellElements = document.querySelectorAll('[data-cell]');
 const board = document.querySelector('[data-board]');
+const strike = document.getElementById("strike");
 
 // Variaveis Tela Final
 const winningMessageTextElement = document.querySelector('[data-winning-message-text]');
@@ -8,14 +9,15 @@ const winningMessage = document.querySelector('[data-winning-message]');
 const restartButtonElement = document.querySelectorAll('[data-restart-button]');
 
 // Variaveis Pontuação
+const playerTurnIndicator = document.getElementById("slider");
+const xColor = "rgba(255, 60, 172, 1)";
+const circleColor = "rgba(43, 134, 197, 1)";
 const xScore = document.querySelector('[data-x-score]');
 let xScorePoints = 0;
-xScore.innerText = xScorePoints;
 const circleScore = document.querySelector('[data-circle-score]');
 let circleScorePoints = 0;
-circleScore.innerText = circleScorePoints;
 
-const hideElement = document.querySelector('[data-hide-element]');
+const hideElement = document.querySelectorAll('[data-hide-element]');
 
 // Variaveis Menu
 const burgerContainer = document.getElementById("burger-container");
@@ -28,22 +30,26 @@ let isCircleTurn;
 
 const winningCombinations = [
     // HORIZONTAL
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
+    { combo: [0, 1, 2], strikeClass: "strike-l1" },
+    { combo: [3, 4, 5], strikeClass: "strike-l2" },
+    { combo: [6, 7, 8], strikeClass: "strike-l3" },
 
     // VERTICAL
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
+    { combo: [0, 3, 6], strikeClass: "strike-c1" },
+    { combo: [1, 4, 7], strikeClass: "strike-c2" },
+    { combo: [2, 5, 8], strikeClass: "strike-c3" },
 
     // DIAGONAL
-    [0, 4, 8],
-    [2, 4, 6]
+    { combo: [0, 4, 8], strikeClass: "strike-d1" },
+    { combo: [2, 4, 6],strikeClass: "strike-d2" }
 ];
+
+const combos = winningCombinations.map(e => e.combo);
+const strikeClasses = winningCombinations.map(c => c.strikeClass);
 
 const startGame = () => {
     isCircleTurn = false;
+    changePlayerIndicator(isCircleTurn);
 
     for (const cell of cellElements) {
         cell.classList.remove('circle');
@@ -52,8 +58,10 @@ const startGame = () => {
         cell.addEventListener("click", handleClick, { once: true});
     }
 
+    setupScore();
     setBoardHoverPlayer();
-    hideElement.classList.remove('hide-element');
+    hideElement.forEach(hideElement =>
+        hideElement.classList.remove('hide-element'));
     winningMessage.classList.remove('show-winning-message');
 };
 
@@ -62,20 +70,19 @@ const endGame = (isDraw) => {
         winningMessageTextElement.innerText = 'EMPATE';
     } else {
         if (isCircleTurn) {
-            addScore(circleScore, circleScorePoints);
             winningMessageTextElement.innerText = 'O Venceu';
         } else {
-            addScore(xScore, xScorePoints);
             winningMessageTextElement.innerText = 'X Venceu';
         }
     }
 
-    hideElement.classList.add('hide-element');
+    hideElement.forEach(hideElement =>
+        hideElement.classList.add('hide-element'));
     winningMessage.classList.add('show-winning-message');
 };
 
 const checkForWin = (currentPlayer) => {
-    return winningCombinations.some(combination => {
+    return combos.some(combination => {
         return combination.every(index => {
             return cellElements[index].classList.contains(currentPlayer);
         })
@@ -88,10 +95,28 @@ const checkForDraw = () => {
     });
 };
 
-const addScore = (scoreBoard, score) => {
-    score++;
-    scoreBoard.innerText = score;
-}
+const setupScore = () => {
+    xScore.innerText = xScorePoints;
+    circleScore.innerText = circleScorePoints;
+};
+
+const changePlayerIndicator = (isCircleTurn) => {
+    if (isCircleTurn) {
+        playerTurnIndicator.style.left = "50%";
+        playerTurnIndicator.style.background = circleColor;
+    } else {
+        playerTurnIndicator.style.left = "0";
+        playerTurnIndicator.style.background = xColor;
+    }
+};
+
+const addScore = (currentPlayer) => {
+    if (currentPlayer === 'circle') {
+        circleScorePoints++;
+    } else {
+        xScorePoints++;
+    }
+};
 
 const placeMark = (cell, playerToAdd) => {
     cell.classList.add(playerToAdd);
@@ -103,14 +128,17 @@ const setBoardHoverPlayer = () => {
 
     if (isCircleTurn) {
         board.classList.add('circle');
+
     } else {
         board.classList.add('X');
+
     }
 };
 
 const swapTurns = () => {
     isCircleTurn = !isCircleTurn;
     setBoardHoverPlayer();
+    changePlayerIndicator(isCircleTurn);
 };
 
 const handleClick = (e) => {
@@ -128,6 +156,7 @@ const handleClick = (e) => {
 
     if (isWin) {
         endGame(false);
+        addScore(playerToAdd);
     } 
     else if (isDraw) {
         endGame(true);

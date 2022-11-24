@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="/styles/style.css">
     <title>Jogo da Velha</title>
 </head>
 <body>
@@ -37,10 +37,10 @@
         </div>
 
         <div class="player-turn-indicator">
-            <div class="players">
+            <div class="player">
                 <span class="x-turn">X</span>
                 <span class="circle-turn">O</span>
-                <div class="slider"></div>
+                <div id="slider"></div>
             </div>
         </div>
 
@@ -54,6 +54,7 @@
             <div class="cell" data-cell></div>
             <div class="cell" data-cell></div>
             <div class="cell" data-cell></div>
+            <div id="strike" class="strike"></div>
         </div>
 
         <div class="score x-score-board">
@@ -76,6 +77,6 @@
         </div>
     </main>
     
-    <script src="./indexScript.js"></script>
+    <script src="/scripts/indexScript.js"></script>
 </body>
 </html>

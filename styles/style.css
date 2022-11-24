@@ -17,52 +17,19 @@
 
 header#myHeader{
     width: 100vw;
-    /* background-color: rgba(255, 255, 255, 0.3); */
 }
 
 body{
     height: 100vh;
     width: 100vw;
-    background: linear-gradient(90deg, rgba(65, 185, 131, 1) 0%, rgba(0, 212, 255, 1) 100%);
+    background: linear-gradient(90deg, rgba(255, 60, 172, 1) 0%, rgba(120, 75, 160, 1) 50%, rgba(43, 134, 197, 1) 100%);
 }
 
 /* MENU */
 span#burger {
     color: white;
-    /* display: block; */
     padding: 10px;
     font-size: 2.5rem;
-}
-
-span#burger:hover {
-    cursor: pointer;
-}
-
-menu {
-    display: none;
-    position: absolute;
-    width: 100vw;
-    background-color: rgba(255, 255, 255, 0.3);
-}
-
-menu > ul {
-    list-style-type: none;
-}
-
-menu > ul > li {
-    display: block;
-    padding: 10px;
-    padding-left: 40px;
-    text-decoration: none;
-    text-align: left;
-    font-size: 1.5rem;
-    color: white;
-}
-
-menu > ul > li:hover {
-    color:  rgba(65, 185, 131, 1);
-    background-color: white;
-    cursor: pointer;
 }
 
 /* BURGER MENU */
@@ -125,6 +92,37 @@ label span:nth-child(3) {
 #checkbox-menu:checked + label span:nth-child(3) {
     transform: rotate(45deg);
     top: 8px;
+}
+
+span#burger:hover {
+    cursor: pointer;
+}
+
+menu {
+    display: none;
+    position: absolute;
+    width: 100vw;
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+menu > ul {
+    list-style-type: none;
+}
+
+menu > ul > li {
+    display: block;
+    padding: 10px;
+    padding-left: 40px;
+    text-decoration: none;
+    text-align: left;
+    font-size: 1.5rem;
+    color: white;
+}
+
+menu > ul > li:hover {
+    color:  rgba(255, 60, 172, 1);
+    background-color: white;
+    cursor: pointer;
 }
 
 /* PARTE PRINCIPAL */
@@ -240,7 +238,7 @@ h2.subtitle {
 }
 
 .player-turn-indicator {
-    /* display: flex; */
+    /* display: none; */
     background: rgba(255, 255, 255, 0.2);
     padding: 7px;
     border-radius: 60px;
@@ -250,14 +248,14 @@ h2.subtitle {
     height: 100%;
 }
 
-.player-turn-indicator .players{
+.player-turn-indicator .player{
     position: relative;
     display: flex;
     width: 100%;
     justify-content: space-between;
 }
 
-.player-turn-indicator .players span {
+.player-turn-indicator .player span {
     width: 100%;
     color: white;
     border-radius: 60px;
@@ -268,21 +266,36 @@ h2.subtitle {
     text-align: center;
     position: relative;
     z-index: 5;
+    transition: all 0.3s ease;
 }
 
-.players span:first-child {
+.player span:first-child {
     color: white;
 }
 
-.players .slider {
+.player #slider {
     position: absolute;
     top: 0;
     left: 0;
     height: 100%;
     width: 50%;
-    background: rgba(0, 212, 255, 1);
+    background: rgba(255, 60, 172, 1);
     border-radius: 60px;
     z-index: 2;
+    transition: all 0.3s ease;
+}
+
+.player.active span:first-child {
+    background: rgba(255, 60, 172, 1);
+    color: white;
+}
+
+.player.active span:nth-child(2) {
+    color: white;
+}
+
+.player.active#slider {
+    left: 50%;
 }
 
 /* TABULEIRO */
@@ -295,13 +308,7 @@ h2.subtitle {
     align-content: center;
     align-items: center;
     grid-template-columns: repeat(3, auto);
-}
-
-.board.X .cell:not(.X):not(.circle):hover::before,
-.board.X .cell:not(.X):not(.circle):hover::after,
-.board.circle .cell:not(.X):not(.circle):hover::before,
-.board.circle .cell:not(.X):not(.circle):hover::after {
-    background: rgba(255, 255, 255, .3) !important;
+    position: relative;
 }
 
 /* CÉLULA */
@@ -309,10 +316,22 @@ h2.subtitle {
     width: 150px;
     height: 150px;
     border: 2px solid white;
+    border-radius: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
+}
+
+/* CÉLULA HOVER */
+.board.X .cell:not(.X):not(.circle):hover::before,
+.board.X .cell:not(.X):not(.circle):hover::after {
+    background: rgba(255, 255, 255, .3) !important;
+}
+
+.board.circle .cell:not(.X):not(.circle):hover::before,
+.board.circle .cell:not(.X):not(.circle):hover::after {
+    border-color: rgba(255, 255, 255, .3) !important;
 }
 
 .cell.X, .cell.circle {
@@ -374,11 +393,77 @@ h2.subtitle {
 .board.circle .cell:not(.X):not(.circle):hover::before,
 .board.circle .cell:not(.X):not(.circle):hover::after {
     content: "";
-    height: calc(150px * 0.9);
-    width: calc(150px * 0.9);
-    background: white;
+    height: calc(150px * 0.6);
+    width: calc(150px * 0.6);
     position: absolute;
+    border: solid 12px white;
+    background: transparent;
     border-radius: 50%;
+}
+
+/* LINHA EM CIMA DA JAGADA VENCEDORA */
+.strike {
+    position: absolute;
+    background-color: rgba(255, 60, 172, 1);
+    border-radius: 50px;
+}
+
+.strike-l1 {
+    width: 24%;
+    height: 8px;
+    top: 15.5%;
+    left: 38%;
+}
+
+.strike-l2 {
+    width: 24%;
+    height: 8px;
+    top: 49.5%;
+    left: 38%;
+}
+
+.strike-l3 {
+    width: 24%;
+    height: 8px;
+    top: 83%;
+    left: 38%;
+}
+
+.strike-c1 {
+    height: 100%;
+    width: 8px;
+    top: 0%;
+    left: 41.8%;
+}
+
+.strike-c2 {
+    height: 100%;
+    width: 8px;
+    top: 0%;
+    left: 49.9%;
+}
+
+.strike-c3 {
+    height: 100%;
+    width: 8px;
+    top: 0%;
+    left: 57.9%;
+}
+
+.strike-d1 {
+    width: 24.5%;
+    height: 8px;
+    top: 50%;
+    left: 38%;
+    transform: skewY(45deg);
+}
+
+.strike-d2 {
+    width: 23.5%;
+    height: 8px;
+    top: 50%;
+    left: 38%;
+    transform: skewY(-45deg);
 }
 
 /* SCORE ESTILO GERAL */
@@ -433,7 +518,7 @@ h2.subtitle {
 
 .restart-button {
     font-size: 2.5rem;
-    background-color:  rgba(65, 185, 131, 1);
+    background-color:  rgba(255, 60, 172, 1);
     padding: 10px 15px;
     cursor: pointer;
     border-radius: 60px;
@@ -446,13 +531,13 @@ h2.subtitle {
 .restart-button:hover {
     transform: scale(0.96);
     background-color: white;
-    color:  rgba(65, 185, 131, 1);
+    color:  rgba(255, 60, 172, 1);
 }
 
 .restart-button-position{
     display: flex;
     position: fixed;
-    top: 810px;
+    top: 770px;
     left: 200px;
     right: 200px;
     bottom: 200px;
