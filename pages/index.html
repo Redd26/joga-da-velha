@@ -69,13 +69,27 @@
     
         <div class="winning-message" data-winning-message>
             <p class="winning-message-text" data-winning-message-text>X VENCEU</p>
-            <button class="restart-button" data-restart-button>Jogar Novamente</button>
+
+            <div class="restart-button" data-restart-button>
+                <span class="restart-icon">
+                    <ion-icon name="refresh-outline"></ion-icon>
+                </span>
+                <span class="restart-title">Recomeçar</span>
+            </div>
         </div>
     
         <div class="restart-button-position">
-            <button class="restart-button" data-restart-button data-hide-element>Recomeçar</button>
+            <div class="restart-button" data-restart-button data-hide-element>
+                <span class="restart-icon">
+                    <ion-icon name="refresh-outline"></ion-icon>
+                </span>
+                <span class="restart-title">Recomeçar</span>
+            </div>
         </div>
     </main>
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     
     <script src="/scripts/indexScript.js"></script>
 </body>

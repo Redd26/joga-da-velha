@@ -8,7 +8,7 @@ const winningMessageTextElement = document.querySelector('[data-winning-message-
 const winningMessage = document.querySelector('[data-winning-message]');
 const restartButtonElement = document.querySelectorAll('[data-restart-button]');
 
-// Variaveis Pontuação
+// HUD
 const playerTurnIndicator = document.getElementById("slider");
 const xColor = "rgba(255, 60, 172, 1)";
 const circleColor = "rgba(43, 134, 197, 1)";

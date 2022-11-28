@@ -1,6 +1,6 @@
 @font-face {
     font-family: "Arvo";
-    src: url('fonts/Arvo-Regular.ttf') format('truetype');
+    src: url('/fonts/Arvo-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
@@ -22,7 +22,7 @@ header#myHeader{
 body{
     height: 100vh;
     width: 100vw;
-    background: linear-gradient(90deg, rgba(255, 60, 172, 1) 0%, rgba(120, 75, 160, 1) 50%, rgba(43, 134, 197, 1) 100%);
+    background: linear-gradient(45deg, rgba(255, 60, 172, 1) 0%, rgba(120, 75, 160, 1) 50%, rgba(43, 134, 197, 1) 100%);
 }
 
 /* MENU */
@@ -145,11 +145,24 @@ h2.subtitle {
     font-size: 2rem;
 }
 
+.video-container::before {
+    content: '';
+    position: absolute;
+    top: -230px;
+    left: 300px;
+    width: 100%;
+    height: 100%;
+    border-radius: 50px;
+    background: linear-gradient(45deg, rgba(255, 60, 172, 1), rgba(43, 134, 197, 1));
+    filter: blur(40px);
+    transform: translate(10px, 5px) scale(0.7, 0.5);
+}
+
 .video-container{
     position: fixed;
     width: 68%;
-    padding-bottom: 56.25%; 
     height: 0;
+    padding-bottom: 56.25%; 
   }
 
 .video-container iframe{
@@ -238,10 +251,11 @@ h2.subtitle {
 }
 
 .player-turn-indicator {
-    /* display: none; */
-    background: rgba(255, 255, 255, 0.2);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    backdrop-filter: blur(10px);
     padding: 7px;
     border-radius: 60px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15);
     max-width: 400px;
     max-height: 100px;
     width: 100%;
@@ -282,7 +296,7 @@ h2.subtitle {
     background: rgba(255, 60, 172, 1);
     border-radius: 60px;
     z-index: 2;
-    transition: all 0.3s ease;
+    transition: all 0.5s ease;
 }
 
 .player.active span:first-child {
@@ -301,7 +315,6 @@ h2.subtitle {
 /* TABULEIRO */
 .board{
     display: grid;
-    /* display: none; */
     width: 100%;
     height: 100%;
     justify-content: center;
@@ -316,7 +329,7 @@ h2.subtitle {
     width: 150px;
     height: 150px;
     border: 2px solid white;
-    border-radius: 15px;
+    border-radius: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -516,22 +529,91 @@ h2.subtitle {
     flex-direction: column;
 }
 
-.restart-button {
-    font-size: 2.5rem;
-    background-color:  rgba(255, 60, 172, 1);
-    padding: 10px 15px;
-    cursor: pointer;
+/* BOTÃO DE RECOMEÇAR */
+.restart-button::before {
+    content: '';
+    position: absolute;
+    inset: 0;
     border-radius: 60px;
-    border: none;
-    margin-top: 16px;
-    color: white;
-    transition: all 0.3s ease;
+    background: linear-gradient(45deg, #ffa9c6, #f434e2);
+    opacity: 0;
+    transition: 0.5s ease;
+}
+
+.restart-button:hover::before {
+    opacity: 1;
+}
+
+.restart-button {
+    position: relative;
+    display: flex;
+    vertical-align: middle;
+    align-items: center;
+    width: 60px;
+    height: 60px;
+    background-color: rgba(255, 60, 172, 1);
+    border-radius: 60px;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    transition: 0.5s ease;
 }
 
 .restart-button:hover {
-    transform: scale(0.96);
-    background-color: white;
-    color:  rgba(255, 60, 172, 1);
+    width: 350px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0);
+}
+
+.restart-button::after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    width: 100%;
+    height: 100%;
+    border-radius: 60px;
+    background: linear-gradient(45deg, #ffa9c6, #f434e2);
+    transition: 0.5s ease;
+    filter: blur(15px);
+    z-index: -1;
+    opacity: 0;
+}
+
+.restart-button:hover::after {
+    opacity: 0.5;
+}
+
+.restart-button ion-icon {
+    color: white;
+    font-size: 2.5rem;
+    padding: 10px;
+    transition: 0.5s ease;
+    transition-delay: 0.25s ease;
+}
+
+.restart-button:hover ion-icon {
+    transform: rotate(360deg);
+    opacity: 0;
+    color: white;
+    transition-delay: 0s ease;
+}
+
+.restart-button span {
+    position: absolute;
+}
+
+.restart-button .restart-title {
+    color: white;
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 10px 23px;
+    opacity: 0;
+    transition: 0.1s ease;
+    transition-delay: 0s;
+}
+
+.restart-button:hover .restart-title {
+    opacity: 1;
+    transition-delay: 0.25s;
 }
 
 .restart-button-position{
@@ -540,7 +622,6 @@ h2.subtitle {
     top: 770px;
     left: 200px;
     right: 200px;
-    bottom: 200px;
     justify-content: center;
     align-items: center;
     flex-direction: column;
